@@ -11,14 +11,16 @@
     <div class="form-container">
       <h2>CSP Fill Up Form</h2>
       <form action="https://formsubmit.co/yuzithzu@gmail.com" method="POST">
+        <input type="hidden" name="_cc" value="cspmanila@completesolutionpharmacy.com">
+
         <div class="form-group">
           <label for="patientName">Name of the Patient:</label>
-          <input type="text" id="patientName" name="patientName" required>
+          <input type="text" id="patientName" name="patientName" oninput="convertToUppercase(this)" required>
         </div>
 
         <div class="form-group">
           <label for="patientAddress">Patient Address:</label>
-          <input type="text" id="patientAddress" name="patientAddress" required>
+          <input type="text" id="patientAddress" name="patientAddress" oninput="convertToUppercase(this)" required>
         </div>
 
         <div class="form-group">
@@ -28,12 +30,12 @@
 
         <div class="form-group">
           <label for="hospitalName">Hospital Name:</label>
-          <input type="text" id="hospitalName" name="hospitalName" required>
+          <input type="text" id="hospitalName" name="hospitalName" oninput="convertToUppercase(this)" required>
         </div>
 
         <div class="form-group">
           <label for="doctorsName">Doctor's Name:</label>
-          <input type="text" id="doctorsName" name="doctorsName" required>
+          <input type="text" id="doctorsName" name="doctorsName" oninput="convertToUppercase(this)" required>
         </div>
 
         <div class="form-group">
@@ -51,5 +53,12 @@
       </form>
     </div>
   </div>
+
+  <!-- JavaScript to convert input values to uppercase -->
+  <script>
+    function convertToUppercase(input) {
+      input.value = input.value.toUpperCase();
+    }
+  </script>
 </body>
 </html>
