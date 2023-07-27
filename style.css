@@ -34,16 +34,15 @@ h2 {
 
 .form-group {
   margin-bottom: 15px;
+  display: flex; /* Use flexbox to align label and input elements side by side */
+  flex-direction: column; /* Arrange label and input elements in a column */
 }
 
 label {
-  display: block;
-  margin-bottom: 5px;
   font-weight: bold;
 }
 
 input {
-  width: 100%;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
