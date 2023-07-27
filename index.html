@@ -5,12 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CSP Fill Up Form</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* CSS to align form elements and make them equal width */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 10px;
+    }
+
+    .form-group label {
+      margin-bottom: 5px;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 5px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <div class="form-container">
       <h2>CSP Fill Up Form</h2>
-      <form action="https://formsubmit.co/yuzithzu@gmail.com" method="POST">
+      <form method="POST" action="https://formsubmit.co/yuzithzu@gmail.com" enctype="multipart/form-data">
+        <!-- Add your email address as the recipient for form submission -->
         <input type="hidden" name="_cc" value="cspmanila@completesolutionpharmacy.com">
 
         <div class="form-group">
@@ -47,6 +80,17 @@
             <option value="DSWD">DSWD</option>
             <option value="BACLARAN">BACLARAN</option>
           </select>
+        </div>
+
+        <!-- Attachments -->
+        <div class="form-group">
+          <label for="attachment1">Patient ID:</label>
+          <input type="file" id="attachment1" name="id_of_the_pt" placeholder="ID of the PT" required>
+        </div>
+
+        <div class="form-group">
+          <label for="attachment2">Prescription:</label>
+          <input type="file" id="attachment2" name="attachment" accept="image/png, image/jpeg" required>
         </div>
 
         <button type="submit">Submit</button>
