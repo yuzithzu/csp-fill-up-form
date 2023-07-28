@@ -133,13 +133,13 @@
       <div class="navigation-buttons">
         <button id="goToFormButton">QUOTATION</button>
         <div style="margin-right: 10px;"></div> 
-        <button id="salesRepresentativeButton">SALE'S REPRESENTATIVE</button>
+        <button id="salesRepresentativeButton">SALES REPRESENTATIVE</button>
       </div>
     </div>
 
     <!-- Sales Representative section -->
     <div class="sales-representative" id="salesRepresentativeSection" style="display: none;">
-      <h2>Sale's Representative</h2>
+      <h2>Sales Representative</h2>
       <p>Dear Sir/Ma'am,</p>
       <p>To make direct reservations for the medicine, please contact our sales team by either sending a text or giving them a call. Below are the contact details of our sales representatives:</p>
       <ul>
@@ -149,6 +149,9 @@
         <li>Kim: +639155325971</li>
       </ul>
       <p>Please let me know that you have received this text.</p>
+      <div class="navigation-buttons">
+        <button id="goBackToHomeButton">Back</button>
+      </div>
     </div>
 
     <!-- Form Section -->
@@ -242,40 +245,50 @@
     </div>
   </div>
 
-  <!-- JavaScript to convert input values to uppercase and handle navigation between sections -->
-  <script>
-    function convertToUppercase(input) {
-      input.value = input.value.toUpperCase();
+ <!-- ... (unchanged HTML code) ... -->
+
+<!-- JavaScript to convert input values to uppercase and handle navigation between sections -->
+<script>
+  function convertToUppercase(input) {
+    input.value = input.value.toUpperCase();
+  }
+
+  document.getElementById("goToFormButton").addEventListener("click", function() {
+    document.querySelector(".front-page").style.display = "none";
+    document.querySelector(".form-section").classList.add("active");
+  });
+
+  document.getElementById("salesRepresentativeButton").addEventListener("click", function() {
+    document.querySelector(".front-page").style.display = "none";
+    document.getElementById("salesRepresentativeSection").style.display = "block";
+  });
+
+  document.getElementById("goBackButton").addEventListener("click", function() {
+    document.querySelector(".front-page").style.display = "block";
+    document.querySelector(".form-section").classList.remove("active");
+    document.getElementById("salesRepresentativeSection").style.display = "none";
+    document.getElementById("submittedDataTable").style.display = "none";
+  });
+
+  // Additional event listener for the "Back" button in the Sales Representative section
+  document.getElementById("goBackToHomeButton").addEventListener("click", function() {
+    document.querySelector(".front-page").style.display = "block";
+    document.querySelector(".form-section").classList.remove("active");
+    document.getElementById("salesRepresentativeSection").style.display = "none";
+    document.getElementById("submittedDataTable").style.display = "none";
+  });
+
+  // Function to show/hide the walk-in appointment message
+  function showWalkInMessage(selectElement) {
+    const walkInMessage = document.getElementById("walkInMessage");
+    const selectedOption = selectElement.value;
+    if (selectedOption === "OVP" || selectedOption === "OP") {
+      walkInMessage.style.display = "block";
+    } else {
+      walkInMessage.style.display = "none";
     }
+  }
 
-    document.getElementById("goToFormButton").addEventListener("click", function() {
-      document.querySelector(".front-page").style.display = "none";
-      document.querySelector(".form-section").classList.add("active");
-    });
-
-    document.getElementById("salesRepresentativeButton").addEventListener("click", function() {
-      document.querySelector(".front-page").style.display = "none";
-      document.getElementById("salesRepresentativeSection").style.display = "block";
-    });
-
-    document.getElementById("goBackButton").addEventListener("click", function() {
-      document.querySelector(".front-page").style.display = "block";
-      document.querySelector(".form-section").classList.remove("active");
-      document.getElementById("salesRepresentativeSection").style.display = "none";
-      document.getElementById("submittedDataTable").style.display = "none";
-    });
-
-    // Function to show/hide the walk-in appointment message
-    function showWalkInMessage(selectElement) {
-      const walkInMessage = document.getElementById("walkInMessage");
-      const selectedOption = selectElement.value;
-      if (selectedOption === "OVP" || selectedOption === "OP") {
-        walkInMessage.style.display = "block";
-      } else {
-        walkInMessage.style.display = "none";
-      }
-    }
-
-  </script>
+</script>
 </body>
 </html>
