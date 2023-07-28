@@ -151,7 +151,7 @@
     </div>
   </div>
 
-  <!-- JavaScript to convert input values to uppercase -->
+  <!-- JavaScript to convert input values to uppercase and handle walk-in message -->
   <script>
     function convertToUppercase(input) {
       input.value = input.value.toUpperCase();
@@ -167,6 +167,27 @@
         walkInMessage.style.display = "none";
       }
     }
+
+    // JavaScript code from the previous example to handle form submission
+    const form = document.getElementById('myForm');
+    const referenceDiv = document.createElement('div');
+    referenceDiv.setAttribute('id', 'reference');
+    const referenceHeading = document.createElement('h2');
+    referenceHeading.textContent = 'Your Email Reference:';
+    const userEmailParagraph = document.createElement('p');
+    userEmailParagraph.setAttribute('id', 'userEmail');
+    referenceDiv.appendChild(referenceHeading);
+    referenceDiv.appendChild(userEmailParagraph);
+    form.parentNode.insertBefore(referenceDiv, form.nextSibling);
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault(); // Prevent the default form submission.
+
+      const userEmail = form.elements.email.value;
+      userEmailParagraph.textContent = userEmail;
+      referenceDiv.style.display = 'block';
+      form.reset();
+    });
   </script>
 </body>
 </html>
