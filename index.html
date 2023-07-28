@@ -156,7 +156,7 @@
     </div>
   </div>
 
-  <!-- JavaScript to convert input values to uppercase and handle walk-in message -->
+  <!-- JavaScript to convert input values to uppercase -->
   <script>
     function convertToUppercase(input) {
       input.value = input.value.toUpperCase();
@@ -172,28 +172,6 @@
         walkInMessage.style.display = "none";
       }
     }
-
-    // JavaScript code to handle form submission and display email receipt in an alert
-    const form = document.querySelector('form');
-
-    form.addEventListener('submit', (event) => {
-      event.preventDefault(); // Prevent the default form submission.
-
-      // Get the form data
-      const formData = new FormData(form);
-      const formEntries = formData.entries();
-
-      // Create the email receipt message
-      let emailReceipt = "Thank you for filling out the form. Here are the details you submitted:\n\n";
-      for (const [name, value] of formEntries) {
-        emailReceipt += `${name}: ${value}\n`;
-      }
-
-      // Display the email receipt in an alert (you can modify this to send it via email)
-      alert(emailReceipt);
-
-      form.reset(); // Optional: Reset the form after displaying the receipt.
-    });
   </script>
 </body>
 </html>
