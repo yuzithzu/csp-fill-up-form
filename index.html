@@ -245,12 +245,23 @@
     </div>
   </div>
 
- <!-- ... (unchanged HTML code) ... -->
-
-<!-- JavaScript to convert input values to uppercase and handle navigation between sections -->
+  <!-- JavaScript to convert input values to uppercase and handle navigation between sections -->
 <script>
   function convertToUppercase(input) {
     input.value = input.value.toUpperCase();
+  }
+
+  // Function to validate form attachments
+  function validateAttachments() {
+    const attachment1 = document.getElementById("attachment1").files.length;
+    const attachment2 = document.getElementById("attachment2").files.length;
+
+    if (attachment1 === 0 || attachment2 === 0) {
+      alert("Please attach both Patient ID and Prescription.");
+      return false;
+    }
+
+    return true;
   }
 
   document.getElementById("goToFormButton").addEventListener("click", function() {
@@ -288,6 +299,13 @@
       walkInMessage.style.display = "none";
     }
   }
+
+  // Attach event listener to the form submit button for validation
+  document.querySelector("form").addEventListener("submit", function(event) {
+    if (!validateAttachments()) {
+      event.preventDefault(); // Prevent form submission
+    }
+  });
 
 </script>
 </body>
