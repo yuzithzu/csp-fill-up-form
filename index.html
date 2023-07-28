@@ -21,7 +21,7 @@
       justify-content: center;
       align-items: center;
       width: 100%;
-      max-width: 400px;
+      max-width: 800px;
       background-color: #fff;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -87,6 +87,22 @@
     .navigation-buttons button:hover {
       background-color: #166fe5;
     }
+
+    /* Table Styles */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -103,10 +119,11 @@
     <!-- Form Section -->
     <div class="form-section" id="formSection">
       <h2>CSP Fill Up Form</h2>
-      <form method="POST" action="https://formsubmit.co/yuzithzu@gmail.com" enctype="multipart/form-data">
+      <form method="POST" onsubmit="return handleFormSubmission(event)">
         <!-- Add your email address as the recipient for form submission -->
         <input type="hidden" name="_cc" value="cspmanila@completesolutionpharmacy.com">
-
+        <input type="hidden" name="_template" value="table">
+                
         <div class="form-group">
           <label for="patientName">Name of the Patient:</label>
           <input type="text" id="patientName" name="patientName" oninput="convertToUppercase(this)" required>
@@ -170,6 +187,22 @@
         </div>
       </form>
     </div>
+
+    <!-- Submitted Data Table -->
+    <div id="submittedDataTable" style="display: none;">
+      <h2>Submitted Data</h2>
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Submitted form data will be inserted here dynamically -->
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <!-- JavaScript to convert input values to uppercase and handle navigation between sections -->
@@ -186,6 +219,7 @@
     document.getElementById("goBackButton").addEventListener("click", function() {
       document.querySelector(".front-page").style.display = "block";
       document.querySelector(".form-section").classList.remove("active");
+      document.getElementById("submittedDataTable").style.display = "none";
     });
 
     // Function to show/hide the walk-in appointment message
@@ -196,6 +230,39 @@
         walkInMessage.style.display = "block";
       } else {
         walkInMessage.style.display = "none";
+      }
+    }
+
+    // Function to handle form submission
+    function handleFormSubmission(event) {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      const submittedData = {};
+      formData.forEach((value, key) => {
+        submittedData[key] = value;
+      });
+
+      // Display submitted data in the table
+      displaySubmittedData(submittedData);
+      document.getElementById("formSection").style.display = "none";
+      document.getElementById("submittedDataTable").style.display = "block";
+
+      return false;
+    }
+
+    // Function to display submitted data in the table
+    function displaySubmittedData(data) {
+      const tableBody = document.querySelector("#dataTable tbody");
+      tableBody.innerHTML = "";
+      for (const key in data) {
+        const row = document.createElement("tr");
+        const fieldCell = document.createElement("td");
+        const valueCell = document.createElement("td");
+        fieldCell.textContent = key;
+        valueCell.textContent = data[key];
+        row.appendChild(fieldCell);
+        row.appendChild(valueCell);
+        tableBody.appendChild(row);
       }
     }
   </script>
