@@ -168,25 +168,26 @@
       }
     }
 
-    // JavaScript code from the previous example to handle form submission
+    // JavaScript code to handle form submission and display email receipt
     const form = document.getElementById('myForm');
-    const referenceDiv = document.createElement('div');
-    referenceDiv.setAttribute('id', 'reference');
-    const referenceHeading = document.createElement('h2');
-    referenceHeading.textContent = 'Your Email Reference:';
-    const userEmailParagraph = document.createElement('p');
-    userEmailParagraph.setAttribute('id', 'userEmail');
-    referenceDiv.appendChild(referenceHeading);
-    referenceDiv.appendChild(userEmailParagraph);
-    form.parentNode.insertBefore(referenceDiv, form.nextSibling);
 
     form.addEventListener('submit', (event) => {
       event.preventDefault(); // Prevent the default form submission.
 
-      const userEmail = form.elements.email.value;
-      userEmailParagraph.textContent = userEmail;
-      referenceDiv.style.display = 'block';
-      form.reset();
+      // Get the form data
+      const formData = new FormData(form);
+      const formEntries = formData.entries();
+
+      // Create the email receipt message
+      let emailReceipt = "Thank you for filling out the form. Here are the details you submitted:\n\n";
+      for (const [name, value] of formEntries) {
+        emailReceipt += `${name}: ${value}\n`;
+      }
+
+      // Display the email receipt in an alert (you can modify this to send it via email)
+      alert(emailReceipt);
+
+      form.reset(); // Optional: Reset the form after displaying the receipt.
     });
   </script>
 </body>
