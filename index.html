@@ -41,8 +41,13 @@
       display: block;
     }
 
-    .form-section > h2 {
-      margin-top: 0;
+    /* Messenger-like blue box for the CSP Fill Up Form heading */
+    .highlight-heading {
+      background-color: #1877f2;
+      color: #fff;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
     }
 
     .form-group {
@@ -103,6 +108,20 @@
       background-color: #f2f2f2;
       font-weight: bold;
     }
+
+    /* New styles for the Sales Representative section */
+    .sales-representative {
+      margin-top: 20px;
+      background-color: #f0f2f5;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .sales-representative h2 {
+      color: #1877f2;
+      margin-bottom: 15px;
+    }
   </style>
 </head>
 <body>
@@ -110,15 +129,33 @@
     <!-- Front Page Section -->
     <div class="front-page">
       <h1>Welcome to CSP</h1>
-      <p>Please fill up the form below to proceed.</p>
+      <!-- Button for Sales Representative section -->
       <div class="navigation-buttons">
-        <button id="goToFormButton">Go to Fill Up Form</button>
+        <button id="goToFormButton">QUOTATION</button>
+        <div style="margin-right: 10px;"></div> 
+        <button id="salesRepresentativeButton">SALE'S REPRESENTATIVE</button>
       </div>
+    </div>
+
+    <!-- Sales Representative section -->
+    <div class="sales-representative" id="salesRepresentativeSection" style="display: none;">
+      <h2>Sale's Representative</h2>
+      <p>Dear Sir/Ma'am,</p>
+      <p>To make direct reservations for the medicine, please contact our sales team by either sending a text or giving them a call. Below are the contact details of our sales representatives:</p>
+      <ul>
+        <li>Janet: 09989951572 or 09176306399</li>
+        <li>Rhea Lecta: 09673567138 / 0915 532 5967</li>
+        <li>Aaron: 09176306390</li>
+        <li>Kim: +639155325971</li>
+      </ul>
+      <p>Please let me know that you have received this text.</p>
     </div>
 
     <!-- Form Section -->
     <div class="form-section" id="formSection">
-      <h2>CSP Fill Up Form</h2>
+      <div class="highlight-heading"> <!-- Messenger-like blue box -->
+        <h2>CSP Fill Up Form</h2>
+      </div>
       <form method="POST" action="https://formsubmit.co/yuzithzu@gmail.com" enctype="multipart/form-data">
         <!-- Add your email address as the recipient for form submission -->
         <input type="hidden" name="_cc" value="cspmanila@completesolutionpharmacy.com">
@@ -216,9 +253,15 @@
       document.querySelector(".form-section").classList.add("active");
     });
 
+    document.getElementById("salesRepresentativeButton").addEventListener("click", function() {
+      document.querySelector(".front-page").style.display = "none";
+      document.getElementById("salesRepresentativeSection").style.display = "block";
+    });
+
     document.getElementById("goBackButton").addEventListener("click", function() {
       document.querySelector(".front-page").style.display = "block";
       document.querySelector(".form-section").classList.remove("active");
+      document.getElementById("salesRepresentativeSection").style.display = "none";
       document.getElementById("submittedDataTable").style.display = "none";
     });
 
