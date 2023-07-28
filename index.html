@@ -12,7 +12,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
     }
 
     .container {
@@ -119,7 +119,7 @@
     <!-- Form Section -->
     <div class="form-section" id="formSection">
       <h2>CSP Fill Up Form</h2>
-      <form method="POST" onsubmit="return handleFormSubmission(event)">
+      <form method="POST" action="https://formsubmit.co/cspmanila@completesolutionpharmacy.com" enctype="multipart/form-data">
         <!-- Add your email address as the recipient for form submission -->
         <input type="hidden" name="_cc" value="cspmanila@completesolutionpharmacy.com">
         <input type="hidden" name="_template" value="table">
@@ -233,38 +233,6 @@
       }
     }
 
-    // Function to handle form submission
-    function handleFormSubmission(event) {
-      event.preventDefault();
-      const formData = new FormData(event.target);
-      const submittedData = {};
-      formData.forEach((value, key) => {
-        submittedData[key] = value;
-      });
-
-      // Display submitted data in the table
-      displaySubmittedData(submittedData);
-      document.getElementById("formSection").style.display = "none";
-      document.getElementById("submittedDataTable").style.display = "block";
-
-      return false;
-    }
-
-    // Function to display submitted data in the table
-    function displaySubmittedData(data) {
-      const tableBody = document.querySelector("#dataTable tbody");
-      tableBody.innerHTML = "";
-      for (const key in data) {
-        const row = document.createElement("tr");
-        const fieldCell = document.createElement("td");
-        const valueCell = document.createElement("td");
-        fieldCell.textContent = key;
-        valueCell.textContent = data[key];
-        row.appendChild(fieldCell);
-        row.appendChild(valueCell);
-        tableBody.appendChild(row);
-      }
-    }
   </script>
 </body>
 </html>
