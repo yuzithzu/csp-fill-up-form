@@ -7,54 +7,46 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #00008B;
+      background-color: #f0f2f5;
       margin: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      position: relative; /* Needed to position the overlay */
-    }
-
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* Black overlay with opacity */
-      z-index: 1; /* Place the overlay above other elements */
     }
 
     .container {
-      width: 100%;
-      max-width: 400px;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      z-index: 2; /* Place the form above the overlay */
-    }
-
-    .form-container {
+      width: 100%;
+      max-width: 400px;
       background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       padding: 20px;
-      width: 100%; /* To ensure the form takes up the full width of the container */
     }
 
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
+    h1 {
       color: #1877f2;
+      margin-bottom: 10px;
+    }
+
+    .form-section {
+      display: none;
+    }
+
+    .form-section.active {
+      display: block;
+    }
+
+    .form-section > h2 {
+      margin-top: 0;
     }
 
     .form-group {
       margin-bottom: 15px;
-      display: flex; /* Use flexbox to align label and input elements side by side */
-      flex-direction: column; /* Arrange label and input elements in a column */
     }
 
     label {
@@ -69,25 +61,47 @@
       width: 100%;
     }
 
-    button {
+    .walk-in-message {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .navigation-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .navigation-buttons button {
       background-color: #1877f2;
       color: #fff;
       border: none;
       border-radius: 5px;
-      padding: 10px;
-      width: 100%;
+      padding: 10px 20px;
       cursor: pointer;
     }
 
-    button:hover {
+    .navigation-buttons button:hover {
       background-color: #166fe5;
     }
   </style>
 </head>
 <body>
-  <div class="overlay"></div>
   <div class="container">
-    <div class="form-container">
+    <!-- Front Page Section -->
+    <div class="front-page">
+      <h1>Welcome to CSP</h1>
+      <p>Please fill up the form below to proceed.</p>
+      <div class="navigation-buttons">
+        <button id="goToFormButton">Go to Fill Up Form</button>
+      </div>
+    </div>
+
+    <!-- Form Section -->
+    <div class="form-section" id="formSection">
       <h2>CSP Fill Up Form</h2>
       <form method="POST" action="https://formsubmit.co/yuzithzu@gmail.com" enctype="multipart/form-data">
         <!-- Add your email address as the recipient for form submission -->
@@ -109,8 +123,8 @@
         </div>
 
         <div class="form-group">
-          <label for="Emailaddress">Email Address:</label>
-          <input type="text" id="Emailaddress" name="Emailaddress" oninput="convertToUppercase(this)" required>
+          <label for="EmailAddress">Email Address:</label>
+          <input type="email" id="EmailAddress" name="EmailAddress" required>
         </div>
 
         <div class="form-group">
@@ -136,11 +150,10 @@
         </div>
 
         <!-- Additional div to display the walk-in appointment message -->
-        <div id="walkInMessage" style="display: none;">
+        <div class="walk-in-message" id="walkInMessage" style="display: none;">
           <p>ONLY WALK-INS WILL BE ALLOWED TO GIVE YOUR REQUEST FOR THE OP AND OVP QUOTATION</p>
         </div>
 
-        <!-- Attachments -->
         <div class="form-group">
           <label for="attachment1">Patient ID:</label>
           <input type="file" id="attachment1" name="id_of_the_pt" placeholder="ID of the PT" required>
@@ -151,16 +164,29 @@
           <input type="file" id="attachment2" name="attachment" accept="image/png, image/jpeg" required>
         </div>
 
-        <button type="submit">Submit</button>
+        <div class="navigation-buttons">
+          <button type="button" id="goBackButton">Back</button>
+          <button type="submit">Submit</button>
+        </div>
       </form>
     </div>
   </div>
 
-  <!-- JavaScript to convert input values to uppercase -->
+  <!-- JavaScript to convert input values to uppercase and handle navigation between sections -->
   <script>
     function convertToUppercase(input) {
       input.value = input.value.toUpperCase();
     }
+
+    document.getElementById("goToFormButton").addEventListener("click", function() {
+      document.querySelector(".front-page").style.display = "none";
+      document.querySelector(".form-section").classList.add("active");
+    });
+
+    document.getElementById("goBackButton").addEventListener("click", function() {
+      document.querySelector(".front-page").style.display = "block";
+      document.querySelector(".form-section").classList.remove("active");
+    });
 
     // Function to show/hide the walk-in appointment message
     function showWalkInMessage(selectElement) {
